@@ -1,4 +1,4 @@
-// ==================== Formatar input Telefone ========================== //
+    // ==================== Formatar input Telefone ========================== //
 const telefoneInput = document.getElementById('telefone');
 telefoneInput.addEventListener('input', (e) => {
 
@@ -36,7 +36,20 @@ function enviarEvento() {
 async function enviarForm() {
     const form = document.getElementById('form-juros-abusivos');
     const formData = new FormData(form);
-    const url = "https://script.google.com/macros/s/AKfycbzTUH-2Gy5X22ZG58KM6YGClqyxZ3AEIEJivkocWUqEczmCpx8cjaleh9zQwGM5HEbP/exec"; // URL do Apps Script 
+
+   //Ler cookies do navegador
+    function getCookie(name) {
+        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+        return '';
+    }
+
+    // Dados ocultos para a API de Conversões do Meta
+    formData.append('userAgent', navigator.userAgent);
+    formData.append('fbp', getCookie('_fbp'));
+    formData.append('fbc', getCookie('_fbc')); // Só vai ter valor aqui se vier de um anúncio
+   
+    const url = "https://script.google.com/macros/s/AKfycbzxsTTe1mlhkSGPpgPYz1GQPGjLq5mRYRZQEsSl2-cTYQSJ2-l1qFTLR8JbYD2zj41z/exec"; // URL do Apps Script 
 
     try {
         const response = await fetch(url, {
@@ -196,7 +209,7 @@ function enviarWhatsApp() {
         `Taxa Média BACEN: ${taxaBacenText}\n` +
         `Diferença em relação à média: ${diferencaText}\n\n` +
         `Gostaria de discutir as possibilidades.`;
-    const numeroTelefone = "5542991088896";
+    const numeroTelefone = "554284391133";
     const urlWhatsApp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagemWhatsApp)}`;
 
     window.open(urlWhatsApp, '_blank');
