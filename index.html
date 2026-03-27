@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
+
+        <!-- Meta Pixel - Calculadora Juros Abusivos -->
     <script>
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
@@ -47,13 +49,13 @@
 
                 <input class="input" type="text" name="nome" placeholder="Nome Completo" required><br><br>
                 <input class="input" type="email" name="email" placeholder="Email" required><br><br>
-                <input class="input" type="tel" name="telefone" placeholder="Telefone" required><br><br>
+                <input class="input" type="tel" id="telefone" name="telefone" placeholder="Telefone" maxlength="15" required><br><br>
 
                 <select id="valor-divida" name="valor_divida" required>
                     <option value="" disabled selected>Selecione o valor da dívida</option>
-                    <option value="abaixo-50mil">Abaixo de R$50 mil</option>
-                    <option value="entre-50-350mil">Entre R$50 mil e R$350 mil</option>
-                    <option value="acima-350mil">Acima de R$350 mil</option>
+                    <option value="Abaixo de R$50 mil">Abaixo de R$50 mil</option>
+                    <option value="Entre R$50 mil e R$350 mil">Entre R$50 mil e R$350 mil</option>
+                    <option value="Acima de R$350 mil">Acima de R$350 mil</option>
                 </select>
 
                 <br><br>

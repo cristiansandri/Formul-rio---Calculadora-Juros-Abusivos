@@ -1,10 +1,28 @@
+// ==================== Formatar input Telefone ========================== //
+const telefoneInput = document.getElementById('telefone');
+telefoneInput.addEventListener('input', (e) => {
+
+    let v = e.target.value.replace(/\D/g, ''); 
+    v = v.substring(0, 11);
+
+    if (v.length > 10) {
+        v = v.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    } else if (v.length > 6) {
+        v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else if (v.length > 2) {
+        v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    }
+    
+    e.target.value = v; 
+});
+
 // ==================== Enviar Evento ========================== //
 function enviarEvento() {
     const selecaoDivida = document.getElementById('valor-divida').value;
-    if (selecaoDivida === "abaixo-50mil") {
+    if (selecaoDivida === "Abaixo de R$50 mil") {
         fbq('trackCustom', 'Lead Não Qualificado', { valor: selecaoDivida });
         console.log("Evento: Lead Não Qualificado");
-    } else if (selecaoDivida === "entre-50-350mil" || selecaoDivida === "acima-350mil") {
+    } else if (selecaoDivida === "Entre R$50 mil e R$350 mil" || selecaoDivida === "Acima de R$350 mil") {
         fbq('track', 'Lead Qualificado', {
             content_category: 'Calculadora de Dívida',
             status: 'Qualificado'
@@ -14,10 +32,11 @@ function enviarEvento() {
 }
 
 // ==================== Enviar Formulário ===================== //
+// URL da função no Apps Script atrelada a planilha "[MFX] Leads - Calc. Juros Abusivos"
 async function enviarForm() {
     const form = document.getElementById('form-juros-abusivos');
     const formData = new FormData(form);
-    const url = "https://script.google.com/macros/s/AKfycbyNZA-0vVlxPcnkdNfjLtgEXTCX7mamC2-BKfhyzT5MtsfAtg2vjLRJYpvTxhZdzaDT/exec"; // O URL do Apps Script 
+    const url = "https://script.google.com/macros/s/AKfycbzTUH-2Gy5X22ZG58KM6YGClqyxZ3AEIEJivkocWUqEczmCpx8cjaleh9zQwGM5HEbP/exec"; // URL do Apps Script 
 
     try {
         const response = await fetch(url, {
