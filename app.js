@@ -1,8 +1,8 @@
-    // ==================== Formatar input Telefone ========================== //
+// ==================== Formatar input Telefone ========================== //
 const telefoneInput = document.getElementById('telefone');
 telefoneInput.addEventListener('input', (e) => {
 
-    let v = e.target.value.replace(/\D/g, ''); 
+    let v = e.target.value.replace(/\D/g, '');
     v = v.substring(0, 11);
 
     if (v.length > 10) {
@@ -12,8 +12,8 @@ telefoneInput.addEventListener('input', (e) => {
     } else if (v.length > 2) {
         v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
     }
-    
-    e.target.value = v; 
+
+    e.target.value = v;
 });
 
 // ==================== Enviar Evento ========================== //
@@ -37,7 +37,7 @@ async function enviarForm() {
     const form = document.getElementById('form-juros-abusivos');
     const formData = new FormData(form);
 
-   //Ler cookies do navegador
+    //Ler cookies do navegador
     function getCookie(name) {
         let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         if (match) return match[2];
@@ -48,8 +48,9 @@ async function enviarForm() {
     formData.append('userAgent', navigator.userAgent);
     formData.append('fbp', getCookie('_fbp'));
     formData.append('fbc', getCookie('_fbc')); // Só vai ter valor aqui se vier de um anúncio
-   
-    const url = "https://script.google.com/macros/s/AKfycbzxsTTe1mlhkSGPpgPYz1GQPGjLq5mRYRZQEsSl2-cTYQSJ2-l1qFTLR8JbYD2zj41z/exec"; // URL do Apps Script 
+
+    const url = ""; // URL do Apps Script para integração de API de conversões e Google Sheets
+
 
     try {
         const response = await fetch(url, {
@@ -70,8 +71,6 @@ function processarFormulario(botao) {
         form.reportValidity();
         return;
     }
-    enviarEvento();
-    enviarForm();
 
     const modalId = botao.getAttribute('data-modal');
     const modal = document.getElementById(modalId);
@@ -80,8 +79,23 @@ function processarFormulario(botao) {
         modal.showModal();
         document.body.classList.add('sem-scroll');
     }
+    enviarEvento();
+    enviarForm();
 }
 
+// ==================== Abrir POPUP de Aviso ==================== //
+const modal = document.getElementById('modalAviso');
+const btnFechar = document.getElementById('fechar');
+
+// Abre automaticamente quando a página carregar
+window.addEventListener('load', () => {
+    modal.showModal();
+});
+
+// Fecha ao clicar no botão
+btnFechar.addEventListener('click', () => {
+    modal.close();
+});
 
 // ==================== Fechar POPUP ==================== //
 const closeButtons = document.querySelectorAll('.close-modal');
@@ -209,7 +223,7 @@ function enviarWhatsApp() {
         `Taxa Média BACEN: ${taxaBacenText}\n` +
         `Diferença em relação à média: ${diferencaText}\n\n` +
         `Gostaria de discutir as possibilidades.`;
-    const numeroTelefone = "554284391133";
+    const numeroTelefone = "5542991088896";
     const urlWhatsApp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagemWhatsApp)}`;
 
     window.open(urlWhatsApp, '_blank');

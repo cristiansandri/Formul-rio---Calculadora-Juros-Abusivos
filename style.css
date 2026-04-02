@@ -54,6 +54,19 @@ body {
     color: var(--claro);
 }
 
+.modal-aviso {
+    max-width: 600px;
+    text-align: center;
+}
+
+.modal-aviso p {
+    margin: 15px;
+}
+
+.modal-aviso button {
+    width: 100%;
+}
+
 .form-section {
     width: 100%;
     height: 100%;
